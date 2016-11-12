@@ -12,21 +12,21 @@ class Marca extends REST_Controller
     {
         $marcas = $this->marca_model->get();
         if (!is_null($marcas)) {
-            $this->response(array('response' => $marcas), 200);
+            $this->response($marcas, 200);
         } else {
-            $this->response(array('error' => 'No hay marcas en la base de datos...'), 404);
+            $this->response(null, 404);
         }
     }
     public function find_get($id)
     {
         if (!$id) {
-            $this->response(null, 400);
+            $this->response('No se ingreso un valor valido.', 400);
         }
-        $city = $this->marca_model->get($id);
-        if (!is_null($city)) {
-            $this->response(array('response' => $city), 200);
+        $marca = $this->marca_model->get($id);
+        if (!is_null($marca)) {
+            $this->response($marca, 200);
         } else {
-            $this->response(array('error' => 'Ciudad no encontrada...'), 404);
+            $this->response('No existe un registro asociado a la marca.', 404);
         }
     }
     public function index_post()
