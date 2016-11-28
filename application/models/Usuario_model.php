@@ -1,26 +1,40 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Marca_model extends CI_Model
+class Usuario_model extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
     }
+
+    public function login($user)
+	{
+		$query = $this->db->select("nick")
+        ->from('tb_usuario')
+        ->where(array('nick' => $user['nick'], 'password' => $user['password']))
+        ->get();
+		if (($query->num_rows() === 1)) {
+            return $query->row_array();
+        }
+        return false;
+	}
+
     public function get($id = null)
     {
         if (!is_null($id)) {
-            $query = $this->db->select('*')->from('tb_marca')->where('id', $id)->get();
+            $query = $this->db->select('*')->from('tb_usuario')->where('id', $id)->get();
             if ($query->num_rows() === 1) {
                 return $query->row_array();
             }
             return null;
         }
-        $query = $this->db->select('*')->from('tb_marca')->get();
+        $query = $this->db->select('*')->from('tb_usuario')->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
         return null;
     }
+
     public function save($city)
     {
         $this->db->set($this->_setCity($city))->insert('cities');
@@ -29,6 +43,7 @@ class Marca_model extends CI_Model
         }
         return null;
     }
+
     public function update($city)
     {
         $id = $city['id'];
@@ -38,6 +53,7 @@ class Marca_model extends CI_Model
         }
         return null;
     }
+
     public function delete($id)
     {
         $this->db->where('id', $id)->delete('cities');
@@ -46,6 +62,7 @@ class Marca_model extends CI_Model
         }
         return null;
     }
+
     private function _setCity($city)
     {
         return array(

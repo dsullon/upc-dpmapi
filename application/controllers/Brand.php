@@ -1,34 +1,37 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH . '/libraries/REST_Controller.php';
-class Marca extends REST_Controller
+class Brand extends REST_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('marca_model');
+        $this->load->model('brand_model');
     }
+
     public function index_get()
     {
-        $marcas = $this->marca_model->get();
-        if (!is_null($marcas)) {
-            $this->response($marcas, 200);
-        } else {
-            $this->response(null, 404);
+        $brands = $this->brand_model->get();
+        if (!is_null($brands)) {
+            $this->response($brands, 200);
+        }  else{
+            $this->response(array('status' => false, 'error' => 'No data available.'), 404);
         }
     }
+
     public function find_get($id)
     {
         if (!$id) {
-            $this->response('No se ingreso un valor valido.', 400);
+            $this->response(array('status' => false, 'error' => 'A valid value was not entered.'), 400);
         }
-        $marca = $this->marca_model->get($id);
-        if (!is_null($marca)) {
-            $this->response($marca, 200);
-        } else {
-            $this->response('No existe un registro asociado a la marca.', 404);
+        $brand = $this->brand_model->get($id);
+        if ($brand) {
+            $this->response($brand, 200);
+        } else{
+            $this->response(array('status' => false, 'error' => 'No data found.'), 400);
         }
     }
+
     public function index_post()
     {
         if (!$this->post('city')) {
@@ -41,6 +44,7 @@ class Marca extends REST_Controller
             $this->response(array('error', 'Algo se ha roto en el servidor...'), 400);
         }
     }
+
     public function index_put()
     {
         if (!$this->put('city')) {
@@ -53,6 +57,7 @@ class Marca extends REST_Controller
             $this->response(array('error', 'Algo se ha roto en el servidor...'), 400);
         }
     }
+    
     public function index_delete($id)
     {
         if (!$id) {
