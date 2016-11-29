@@ -55,14 +55,14 @@ $route['translate_uri_dashes'] = TRUE;
 
 // Routing for brands
 $route['brands']['get'] = 'brand/index';
-$route['brands/(:num)']['get'] = 'brand/find/$1';
+$route['brands/(:any)']['get'] = 'brand/find/$1';
 $route['brands']['post'] = 'brand/index';
 $route['brands/(:num)']['put'] = 'brand/index/$1';
 $route['brands/(:num)']['delete'] = 'brand/index/$1';
 
 // Routing for drivers
 $route['drivers']['get'] = 'driver/index';
-$route['drivers/(:num)']['get'] = 'driver/find/$1';
+$route['drivers/(:any)']['get'] = 'driver/find/$1';
 $route['drivers']['post'] = 'driver/index';
 $route['drivers/(:num)']['put'] = 'driver/index/$1';
 $route['drivers/(:num)']['delete'] = 'driver/index/$1';
@@ -70,14 +70,14 @@ $route['drivers/(:num)/deliveries']['get'] = 'driver/index/$1';
 
 // Routing for vehicles
 $route['vehicles']['get'] = 'vehicle/index';
-$route['vehicles/(:num)']['get'] = 'vehicle/find/$1';
+$route['vehicles/(:any)']['get'] = 'vehicle/find/$1';
 $route['vehicles']['post'] = 'vehicle/index';
 $route['vehicles/(:num)']['put'] = 'vehicle/index/$1';
 $route['vehicles/(:num)']['delete'] = 'vehicle/index/$1';
 
 // Routing for users
 $route['users']['get'] = 'user/index';
-$route['users/(:num)']['get'] = 'user/find/$1';
+$route['users/(:any)']['get'] = 'user/find/$1';
 $route['users/login']['post'] = 'user/login';
 $route['users']['post'] = 'user/index';
 $route['users/(:num)']['put'] = 'user/index/$1';

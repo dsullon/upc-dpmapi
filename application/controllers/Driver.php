@@ -13,35 +13,39 @@ class Driver extends REST_Controller
     {
         $drivers = $this->driver_model->get();
         if ($drivers) {
-            $this->response($drivers, 200);
+            $this->response(array('status' => 'ok', 'drivers' => $drivers), 
+                REST_Controller::HTTP_OK);
         } else{
-            $this->response(array('status' => false, 'error' => 'No data available.'), 404);
+            $this->response(array('status' => 'error', 'message' => 'No data available.'), 
+                REST_Controller::HTTP_NOT_FOUND);
         }
     }
 
     public function find_get($id)
     {
         if (!$id) {
-            $this->response(array('status' => false, 'error' => 'A valid value was not entered.'), 400);
+            $this->response(array('status' => 'error', 'message' => 'A valid value was not entered.'), 
+                REST_Controller::HTTP_BAD_REQUEST);
         }
         $driver = $this->driver_model->get($id);
         if ($driver) {
-            $this->response($driver, 200);
+            $this->response($driver, REST_Controller::HTTP_OK);
         } else{
-            $this->response(array('status' => false, 'error' => 'No data found.'), 400);
+            $this->response(array('status' => 'error', 'message' => 'No data found.'), 
+                REST_Controller::HTTP_NOT_FOUND);
         }
     }
 
     public function deliveries_get($id)
     {
         if (!$id) {
-            $this->response(array('status' => false, 'error' => 'A valid value was not entered.'), 400);
+            $this->response(array('status' => 'error', 'message' => 'A valid value was not entered.'), 400);
         }
         $deliveries = $this->driver_model->get_deliveries($id);
         if ($deliveries) {
             $this->response($deliveries, 200);
         } else{
-            $this->response(array('status' => false, 'error' => 'No data found.'), 400);
+            $this->response(array('status' => 'error', 'message' => 'No data found.'), 400);
         }
     }
 

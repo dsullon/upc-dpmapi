@@ -13,22 +13,22 @@ class Brand extends REST_Controller
     {
         $brands = $this->brand_model->get();
         if (!is_null($brands)) {
-            $this->response($brands, 200);
+            $this->response(array('status' => 'ok', 'brands' => $brands), 200);
         }  else{
-            $this->response(array('status' => false, 'error' => 'No data available.'), 404);
+            $this->response(array('status' => 'error', 'message' => 'No data available.'), 404);
         }
     }
 
     public function find_get($id)
     {
         if (!$id) {
-            $this->response(array('status' => false, 'error' => 'A valid value was not entered.'), 400);
+            $this->response(array('status' => 'error', 'message' => 'A valid value was not entered.'), 400);
         }
         $brand = $this->brand_model->get($id);
         if ($brand) {
             $this->response($brand, 200);
         } else{
-            $this->response(array('status' => false, 'error' => 'No data found.'), 400);
+            $this->response(array('status' => 'error', 'message' => 'No data found.'), 400);
         }
     }
 
