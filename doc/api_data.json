@@ -1,8 +1,56 @@
 [
   {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/main.js",
+    "group": "C__wamp64_www_upc_dpmapi_doc_main_js",
+    "groupTitle": "C__wamp64_www_upc_dpmapi_doc_main_js",
+    "name": ""
+  },
+  {
     "type": "get",
     "url": "/vehicles/",
     "title": "Read all vehicles data",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "X-API-KEY",
+            "description": "<p>(required) - Your API key.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"X-API-KEY\": \"{Api key value}\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "1.0.0",
     "name": "GetVehicles",
     "group": "Vehicles",
@@ -53,40 +101,12 @@
       "examples": [
         {
           "title": "Response (example):",
-          "content": "HTTP/1.1 401 Not Authenticated\n{\n  \"error\": \"NoAccessRight\"\n}",
+          "content": "HTTP/1.1 403 Unautorized\n{\n  \"status\": \"error\",\n  \"message\": \"Invalid API key \"\n}",
           "type": "json"
         }
       ]
     },
     "filename": "./application/controllers/Vehicle.php",
     "groupTitle": "Vehicles"
-  },
-  {
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p>"
-          }
-        ]
-      }
-    },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "./doc/main.js",
-    "group": "c__wamp64_www_upc_dpmapi_doc_main_js",
-    "groupTitle": "c__wamp64_www_upc_dpmapi_doc_main_js",
-    "name": ""
   }
 ]

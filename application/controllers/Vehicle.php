@@ -15,9 +15,15 @@ class Vehicle extends REST_Controller
 
     /**
     * @api {get} /vehicles/ Read all vehicles data
+    * @apiHeader {string} X-API-KEY (required) - Your API key.
     * @apiVersion 1.0.0
     * @apiName GetVehicles
     * @apiGroup Vehicles
+    *
+    * @apiHeaderExample {json} Header-Example:
+    * {
+    *   "X-API-KEY": "{Api key value}"
+    * }
     *
     * @apiSuccess {string}        status      If the request was successful or not. Options: ok, error. In the case of error a message property will be populated.
     * @apiSuccess {Array[]}       vehicles       A list of the vehicles available.
@@ -52,9 +58,10 @@ class Vehicle extends REST_Controller
     * @apiError UserNotFound   The <code>id</code> of the User was not found.
     *
     * @apiErrorExample Response (example):
-    *     HTTP/1.1 401 Not Authenticated
+    *     HTTP/1.1 403 Unautorized
     *     {
-    *       "error": "NoAccessRight"
+    *       "status": "error",
+    *       "message": "Invalid API key "
     *     }
     */
     public function index_get()
