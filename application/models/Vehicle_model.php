@@ -10,13 +10,17 @@ class Vehicle_model extends CI_Model
     public function get($id = null)
     {
         if (!is_null($id)) {
-            $query = $this->db->select('*')->from('Vehicle')->where('id', $id)->get();
+            $query = $this->db->select('id, model, licencePlate as licence_plate, color, manufactureYear as manufacture_year,
+                engineNumber as engine_number, serialNumber as serial_number, idBrand as brand')
+                ->from('Vehicle')->where('id', $id)->get();
             if ($query->num_rows() === 1) {
                 return $query->row_array();
             }
             return null;
         }
-        $query = $this->db->select('*')->from('Vehicle')->get();
+        $query = $this->db->select('id, model, licencePlate as licence_plate, color, manufactureYear as manufacture_year,
+                engineNumber as engine_number, serialNumber as serial_number, idBrand as brand')
+            ->from('Vehicle')->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
