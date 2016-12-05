@@ -11,13 +11,20 @@ class User extends REST_Controller
     
     public function login_post()
     {
-        $obj=json_decode(file_get_contents('php://input'), true);
+        //$obj=json_decode(file_get_contents('php://input'), true);
 
         $data = array(
-            'nick' => $obj["usuario"],
-            'password' => md5($obj['password'])
+            'user' => $_POST["user"],
+            'password' =>  md5($_POST["password"])
         );
         $user = $this->user_model->login($data);
+        if ($user) {
+            $this->response(array('status' => 'ok', 'user' => $user), 200);
+        } else{
+            $this->response(array('status' => 'error', 'message' => 'No user found.'), 404);
+        }    
+
+
         if ($user) {
             $this->response($user, 200);
         } else {

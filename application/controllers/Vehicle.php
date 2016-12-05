@@ -83,7 +83,7 @@ class Vehicle extends REST_Controller
         if ($vehicle) {
             $this->response(array('status' => 'ok', 'vehicle' => $vehicle), 200);
         } else{
-            $this->response(array('status' => 'error', 'message' => 'No data found.'), 404);
+            $this->response(array('status' => 'error', 'message' => 'No vehicle found.'), 404);
         }
     }
 

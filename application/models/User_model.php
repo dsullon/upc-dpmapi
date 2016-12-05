@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Usuario_model extends CI_Model
+class User_model extends CI_Model
 {
     public function __construct()
     {
@@ -9,9 +9,9 @@ class Usuario_model extends CI_Model
 
     public function login($user)
 	{
-		$query = $this->db->select("nick")
-        ->from('tb_usuario')
-        ->where(array('nick' => $user['nick'], 'password' => $user['password']))
+		$query = $this->db->select("id, name, userName as user_name")
+        ->from('User')
+        ->where(array('userName' => $user['user'], 'password' => $user['password']))
         ->get();
 		if (($query->num_rows() === 1)) {
             return $query->row_array();
