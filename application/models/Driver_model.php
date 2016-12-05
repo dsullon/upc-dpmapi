@@ -10,13 +10,19 @@ class Driver_model extends CI_Model
     public function get($id = null)
     {
         if (!is_null($id)) {
-            $query = $this->db->select('*')->from('Driver')->where('id', $id)->get();
+            $query = $this->db
+                ->select('id, firstName as first_name, lastName as last_name, identityCard as identity_card,
+                    address, phone, driverLicence as driver_licence, dueDate as due_date')
+                ->from('Driver')->where('id', $id)->get();
             if ($query->num_rows() === 1) {
                 return $query->row_array();
             }
             return null;
         }
-        $query = $this->db->select('*')->from('Driver')->get();
+        $query = $this->db
+            ->select('id, firstName as first_name, lastName as last_name, identityCard as identity_card,
+                address, phone, driverLicence as driver_licence, dueDate as due_date')
+            ->from('Driver')->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
